@@ -238,7 +238,7 @@
         <a href="#together" class="nav-link text-gray-300 hover:text-pink-400">Together</a>
         <a href="#qrcode" class="nav-link text-gray-300 hover:text-orange-400">QR Code</a>
         <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400">Gallery</a>
-        <a href="#sound" class="nav-link text-gray-300 hover:text-green-400">Sound</a>
+        <a href="#sound" class="nav-link text-gray-300 hover:text-green-400">Music</a>
         <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400">Wishes</a>
       </div>
       <button id="musicBtn" class="music-btn bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-full text-xs font-semibold transition"> </button>
@@ -329,11 +329,13 @@
           Happy Birthday, <span class="text-purple-400 font-['Pacifico']">Vauju!</span>
         </h2>
         <p class="text-gray-300 leading-relaxed text-lg">
-          You came into our family and made it whole. Your warmth, love, and kindness have touched every one of our hearts. You're not just our Vauju — you're our sister.
+          You came into our lives and brought so much warmth, love, and happiness with you. Soon, you'll officially become our Vauju, but in our hearts, you've already become so much more — a dear sister and a beautiful part of our family.
         </p>
+
         <p class="text-gray-400 leading-relaxed">
-          Thank you for the love you give our brother and for being the beautiful soul that you are. May this year bring you endless happiness, health, and all your dreams come true.
+          Thank you for the love and happiness you bring to our brother and to everyone around you. As you begin this beautiful new chapter with him, may your journey together be filled with endless love, laughter, happiness, and countless beautiful memories. We can't wait to welcome you into our family as our Vauju. ❤️
         </p>
+
         <div class="flex gap-3 flex-wrap">
           <span class="bg-pink-500/20 text-pink-300 px-4 py-1 rounded-full text-sm border border-pink-500/30"> </span>
           <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm border border-purple-500/30"> </span>
@@ -823,13 +825,12 @@
     }, { threshold: 0.15 });
     reveals.forEach(r => revealObserver.observe(r));
 
-    // ── Countdown Timer ──
     (function countdown() {
       function getBirthday() {
         const now = new Date();
         let year = now.getFullYear();
-        let bday = new Date(year, 8, 16); // September 16 (month is 0-indexed)
-        if (now > bday) bday = new Date(year + 1, 8, 16);
+        let bday = new Date(year, 8, 15);
+        if (now > bday) bday = new Date(year + 1, 8, 15);
         return bday;
       }
       let nextBday = getBirthday();
@@ -853,7 +854,6 @@
       setInterval(tick, 1000);
     })();
 
-    // ── Typewriter ──
     (function typewriter() {
       const messages = [
         "Here's to another year of love, laughter, and beautiful memories together. Happy Birthday to the best Dada and Vauju in the world! ",
@@ -884,13 +884,11 @@
       type();
     })();
 
-    // ── On Load Celebration ──
     window.addEventListener('load', () => {
       setTimeout(() => spawnConfetti(80), 500);
       setTimeout(() => spawnBalloons(15), 1200);
     });
 
-    // ── Music Button (toggle visual) ──
     const musicBtn = document.getElementById('musicBtn');
     let musicPlaying = false;
     musicBtn.addEventListener('click', () => {
@@ -902,7 +900,6 @@
       }
     });
 
-    // ── Sound Player ──
     let currentAudio = null;
 
     function playSound(url) {
@@ -927,7 +924,6 @@
       if (currentAudio) currentAudio.volume = val / 100;
     }
 
-    // ── Photo Upload Handler ──
     function handlePhotoUpload(event) {
       const files = event.target.files;
       const container = document.getElementById('uploadedPhotos');
@@ -951,7 +947,6 @@
       }
     }
 
-    // ── Nav scroll highlight ──
     const navLinks = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
       let current = '';
