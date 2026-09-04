@@ -233,7 +233,7 @@
       <div class="flex gap-6 text-sm font-medium">
         <a href="#home" class="nav-link text-gray-300 hover:text-pink-400">Home</a>
         <a href="#brother" class="nav-link text-gray-300 hover:text-pink-400">Brother</a>
-        <a href="#bhabhi" class="nav-link text-gray-300 hover:text-purple-400">Bhabhi</a>
+        <a href="#vauju" class="nav-link text-gray-300 hover:text-purple-400">Vauju</a>
         <a href="#together" class="nav-link text-gray-300 hover:text-pink-400">Together</a>
         <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400">Wishes</a>
       </div>
@@ -247,7 +247,7 @@
     <div class="cake-container text-8xl md:text-9xl mb-6"> </div>
 
     <h1 class="hero-title text-5xl md:text-8xl font-bold mb-4 animate-pulse">Happy Birthday!</h1>
-    <p class="text-xl md:text-2xl text-gray-300 mb-2">To Our Beloved <span class="text-pink-400 font-semibold">Brother</span> & <span class="text-purple-400 font-semibold">Bhabhi</span></p>
+    <p class="text-xl md:text-2xl text-gray-300 mb-2">To Our Beloved <span class="text-pink-400 font-semibold">Dada</span> & <span class="text-purple-400 font-semibold">Vauju</span></p>
     <p class="text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
       Two amazing people, one beautiful celebration. Today we celebrate the joy you bring into our lives and the love you share together.
     </p>
@@ -292,7 +292,7 @@
       </div>
       <div class="reveal space-y-6">
         <h2 class="text-4xl md:text-5xl font-bold">
-          Happy Birthday, <span class="text-pink-400 font-['Pacifico']">Bhai!</span>
+          Happy Birthday, <span class="text-pink-400 font-['Pacifico']">Dada!</span>
         </h2>
         <p class="text-gray-300 leading-relaxed text-lg">
           You're not just a brother — you're a protector, a guide, and a best friend. Every memory we've shared has made our bond stronger and our lives brighter.
@@ -317,15 +317,15 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ BHABHI ═══════════════════ -->
-  <section id="bhabhi" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
+  <!-- ═══════════════════ VAUJU ═══════════════════ -->
+  <section id="vauju" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
       <div class="reveal order-2 md:order-1 space-y-6">
         <h2 class="text-4xl md:text-5xl font-bold">
-          Happy Birthday, <span class="text-purple-400 font-['Pacifico']">Bhabhi!</span>
+          Happy Birthday, <span class="text-purple-400 font-['Pacifico']">Vauju!</span>
         </h2>
         <p class="text-gray-300 leading-relaxed text-lg">
-          You came into our family and made it whole. Your warmth, love, and kindness have touched every one of our hearts. You're not just our Bhabhi — you're our sister.
+          You came into our family and made it whole. Your warmth, love, and kindness have touched every one of our hearts. You're not just our Vauju — you're our sister.
         </p>
         <p class="text-gray-400 leading-relaxed">
           Thank you for the love you give our brother and for being the beautiful soul that you are. May this year bring you endless happiness, health, and all your dreams come true.
@@ -346,7 +346,7 @@
       </div>
       <div class="reveal order-1 md:order-2">
         <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-500/20 border border-white/10">
-          <div class="ribbon" style="background: linear-gradient(135deg,#818cf8,#c084fc);">BHABHI</div>
+          <div class="ribbon" style="background: linear-gradient(135deg,#818cf8,#c084fc);">VAUJU</div>
           <img
             src="https://media.giphy.com/media/3o6ZTaGd0vNTHkYjyE/giphy.gif"
             alt="Celebration"
@@ -362,8 +362,8 @@
     <div class="max-w-4xl mx-auto text-center w-full">
       <div class="reveal space-y-8">
         <h2 class="text-4xl md:text-6xl font-bold font-['Pacifico']">
-          <span class="text-pink-400">Bhai</span> &
-          <span class="text-purple-400">Bhabhi</span>
+          <span class="text-pink-400">Dada</span> &
+          <span class="text-purple-400">Vauju</span>
         </h2>
         <p class="text-xl text-gray-300">Together You Are Magical ✨</p>
 
@@ -507,7 +507,7 @@
 
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
   <footer class="text-center py-8 border-t border-white/10 bg-black/30">
-    <p class="text-gray-500 text-sm">Made with ❤️ | Happy Birthday Bhai & Bhabhi</p>
+    <p class="text-gray-500 text-sm">Made with ❤️ | Happy Birthday Dada & Vauju</p>
     <div class="text-3xl mt-2">  </div>
   </footer>
 
@@ -640,14 +640,19 @@
 
     // ── Countdown Timer ──
     (function countdown() {
-      const today = new Date();
-      const nextBday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-      if (today.getHours() === 0 && today.getMinutes() === 0) nextBday.setDate(nextBday.getDate() - 1);
+      function getBirthday() {
+        const now = new Date();
+        let year = now.getFullYear();
+        let bday = new Date(year, 8, 16); // September 16 (month is 0-indexed)
+        if (now > bday) bday = new Date(year + 1, 8, 16);
+        return bday;
+      }
+      let nextBday = getBirthday();
 
       function tick() {
         const now = new Date();
         let diff = nextBday - now;
-        if (diff < 0) { nextBday.setFullYear(nextBday.getFullYear() + 1); diff = nextBday - now; }
+        if (diff < 0) { nextBday = getBirthday(); diff = nextBday - now; }
 
         const d = Math.floor(diff / 86400000);
         const h = Math.floor((diff % 86400000) / 3600000);
@@ -666,7 +671,7 @@
     // ── Typewriter ──
     (function typewriter() {
       const messages = [
-        "Here's to another year of love, laughter, and beautiful memories together. Happy Birthday to the best brother and bhabhi in the world! ",
+        "Here's to another year of love, laughter, and beautiful memories together. Happy Birthday to the best Dada and Vauju in the world! ",
         "May your birthdays be as wonderful and special as you both are. Wishing you a lifetime of love and happiness! "
       ];
       const el = document.getElementById('typewriterText');
