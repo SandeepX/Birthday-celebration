@@ -3,964 +3,488 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday! </title>
+  <title>Happy Birthday!</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
-      background: #0f0a1a;
-    }
-
-    /* ── Confetti ── */
-    .confetti-piece {
-      position: fixed;
-      top: -10px;
-      width: 10px;
-      height: 20px;
-      border-radius: 2px;
-      animation: confettiFall linear forwards;
-      z-index: 999;
-      pointer-events: none;
-    }
-
-    @keyframes confettiFall {
-      0%   { transform: translateY(0) rotateZ(0deg) rotateX(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotateZ(720deg) rotateX(360deg); opacity: 0; }
-    }
-
-    /* ── Balloons ── */
-    .balloon {
-      position: fixed;
-      bottom: -160px;
-      font-size: 80px;
-      animation: balloonFloat linear forwards;
-      z-index: 50;
-      pointer-events: none;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,.3));
-    }
-    @keyframes balloonFloat {
-      0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
-      25%  { transform: translateY(-25vh) translateX(15px) rotate(5deg); }
-      50%  { transform: translateY(-50vh) translateX(-10px) rotate(-3deg); }
-      75%  { transform: translateY(-75vh) translateX(20px) rotate(4deg); }
-      100% { transform: translateY(-120vh) translateX(-5px) rotate(-2deg); opacity: 0; }
-    }
-
-    /* ── Sparkle ── */
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 998;
-      animation: sparkleAnim 0.8s ease-out forwards;
-    }
-    @keyframes sparkleAnim {
-      0%   { transform: scale(0) rotate(0deg); opacity: 1; }
-      50%  { transform: scale(1.2) rotate(180deg); opacity: 1; }
-      100% { transform: scale(0) rotate(360deg); opacity: 0; }
-    }
-
-    /* ── Hero ── */
-    .hero-title {
-      font-family: 'Pacifico', cursive;
-      background: linear-gradient(135deg, #f472b6, #c084fc, #818cf8, #38bdf8);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientShift 4s ease infinite;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-    }
-
-    /* ── Cake ── */
-    .cake-container {
-      animation: cakeBounce 2s ease-in-out infinite;
-    }
-    @keyframes cakeBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50%      { transform: translateY(-12px) scale(1.03); }
-    }
-
-    /* ── Glow Card ── */
-    .glow-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.12);
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-    .glow-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 0 40px rgba(192,132,252,0.35), 0 0 80px rgba(244,114,182,0.15);
-    }
-
-    /* ── Heartbeat ── */
-    .heartbeat {
-      animation: heartbeat 1.2s ease-in-out infinite;
-    }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      14%      { transform: scale(1.15); }
-      28%      { transform: scale(1); }
-      42%      { transform: scale(1.15); }
-      70%      { transform: scale(1); }
-    }
-
-    /* ── Typewriter ── */
-    .typewriter { border-right: 3px solid #c084fc; animation: blink 0.8s step-end infinite; }
-    @keyframes blink { 50% { border-color: transparent; } }
-
-    /* ── Fade-in sections ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Stars BG ── */
-    .stars {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle 2s ease-in-out infinite alternate;
-    }
-    @keyframes twinkle {
-      0%   { opacity: 0.2; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.5); }
-    }
-
-    /* ── Floating shapes ── */
-
-    .floating-shape {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.08;
-      animation: floatShape 15s ease-in-out infinite;
-    }
-    @keyframes floatShape {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33%      { transform: translate(30px, -30px) rotate(120deg); }
-      66%      { transform: translate(-20px, 20px) rotate(240deg); }
-    }
-
-    /* ── Ribbon ── */
-    .ribbon {
-      position: absolute;
-      top: 20px;
-      right: -35px;
-      background: linear-gradient(135deg, #f472b6, #c084fc);
-      color: #fff;
-      padding: 6px 40px;
-      transform: rotate(45deg);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.3);
-    }
-
-    /* ── Smooth scroll ── */
-    html { scroll-behavior: smooth; }
-
-    /* ── Nav ── */
-    .nav-link {
-      position: relative;
-      transition: color 0.3s;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #f472b6, #c084fc);
-      transition: width 0.3s;
-    }
-    .nav-link:hover::after { width: 100%; }
-
-    /* ── Particle canvas ── */
-    #particleCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* ── Music btn ── */
-    .music-btn {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(192,132,252,0.5); }
-      50%      { box-shadow: 0 0 0 12px rgba(192,132,252,0); }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="text-white">
 
-  <!-- ═══ Stars BG ═══ -->
-  <div class="stars" id="stars"></div>
+<!-- ═══ Stars BG ═══ -->
+<div class="stars" id="stars"></div>
 
-  <!-- ═══ Particle Canvas ═══ -->
-  <canvas id="particleCanvas"></canvas>
+<!-- ═══ Particle Canvas ═══ -->
+<canvas id="particleCanvas"></canvas>
 
-  <!-- ═══ Floating Shapes ═══ -->
-  <div class="floating-shape" style="width:300px;height:300px;background:#f472b6;top:10%;left:5%;animation-delay:0s;"></div>
-  <div class="floating-shape" style="width:200px;height:200px;background:#818cf8;top:60%;right:10%;animation-delay:3s;"></div>
-  <div class="floating-shape" style="width:250px;height:250px;background:#38bdf8;bottom:10%;left:30%;animation-delay:6s;"></div>
+<!-- ═══ Floating Shapes ═══ -->
+<div class="floating-shape" style="width:300px;height:300px;background:#f472b6;top:10%;left:5%;animation-delay:0s;"></div>
+<div class="floating-shape" style="width:200px;height:200px;background:#818cf8;top:60%;right:10%;animation-delay:3s;"></div>
+<div class="floating-shape" style="width:250px;height:250px;background:#38bdf8;bottom:10%;left:30%;animation-delay:6s;"></div>
 
-  <!-- ═══ Navbar ═══ -->
-  <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-3">
-      <span class="text-xl font-bold heartbeat text-pink-400"> </span>
-      <div class="flex gap-6 text-sm font-medium">
-        <a href="#home" class="nav-link text-gray-300 hover:text-pink-400">Home</a>
-        <a href="#brother" class="nav-link text-gray-300 hover:text-pink-400">Brother</a>
-        <a href="#vauju" class="nav-link text-gray-300 hover:text-purple-400">Vauju</a>
-        <a href="#together" class="nav-link text-gray-300 hover:text-pink-400">Together</a>
-        <a href="#qrcode" class="nav-link text-gray-300 hover:text-orange-400">QR Code</a>
-        <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400">Gallery</a>
-        <a href="#sound" class="nav-link text-gray-300 hover:text-green-400">Music</a>
-        <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400">Wishes</a>
-      </div>
-      <button id="musicBtn" class="music-btn bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-full text-xs font-semibold transition"> </button>
+<!-- ═══ Navbar ═══ -->
+<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-3">
+    <span class="text-xl font-bold heartbeat text-pink-400"> </span>
+    <div class="flex gap-6 text-sm font-medium">
+      <a href="#home" class="nav-link text-gray-300 hover:text-pink-400">Home</a>
+      <a href="#brother" class="nav-link text-gray-300 hover:text-pink-400">Brother</a>
+      <a href="#vauju" class="nav-link text-gray-300 hover:text-purple-400">Vauju</a>
+      <a href="#cakecutting" class="nav-link text-gray-300 hover:text-yellow-400">Cake Time</a>
+      <a href="#together" class="nav-link text-gray-300 hover:text-pink-400">Together</a>
+      <a href="#qrcode" class="nav-link text-gray-300 hover:text-orange-400">QR Code</a>
+      <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400">Gallery</a>
+      <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400">Wishes</a>
     </div>
-  </nav>
+    <button id="musicBtn" class="music-btn bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-full text-xs font-semibold transition">🎵 Play Song</button>
+  </div>
+</nav>
 
-  <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section id="home" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
-    <!-- Cake -->
-    <div class="cake-container text-8xl md:text-9xl mb-6"> </div>
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="home" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+  <div class="glow-ring" style="top:5%; left:50%; transform:translateX(-50%);"></div>
 
-    <h1 class="hero-title text-5xl md:text-8xl font-bold mb-4 animate-pulse">Happy Birthday!</h1>
-    <p class="text-xl md:text-2xl text-gray-300 mb-2">To Our Beloved <span class="text-pink-400 font-semibold">Dada</span> & <span class="text-purple-400 font-semibold">Vauju</span></p>
-    <p class="text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
-      Two amazing people, one beautiful celebration. Today we celebrate the joy you bring into our lives and the love you share together.
-    </p>
+  <!-- Cake -->
+  <div class="cake-container text-8xl md:text-9xl mb-6" id="cakeEmoji"> </div>
 
-    <!-- Countdown / Age reveal -->
-    <div class="flex gap-4 mb-8" id="countBoxes">
-      <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
-        <div class="text-3xl font-bold text-pink-400" id="cDays">00</div>
-        <div class="text-xs text-gray-400 uppercase tracking-wider">Days</div>
-      </div>
-      <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
-        <div class="text-3xl font-bold text-purple-400" id="cHours">00</div>
-        <div class="text-xs text-gray-400 uppercase tracking-wider">Hours</div>
-      </div>
-      <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
-        <div class="text-3xl font-bold text-blue-400" id="cMins">00</div>
-        <div class="text-xs text-gray-400 uppercase tracking-wider">Mins</div>
-      </div>
-      <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
-        <div class="text-3xl font-bold text-green-400" id="cSecs">00</div>
-        <div class="text-xs text-gray-400 uppercase tracking-wider">Secs</div>
-      </div>
+  <h1 class="hero-title text-5xl md:text-8xl font-bold mb-4 animate-pulse">Happy Birthday!</h1>
+  <p class="text-xl md:text-2xl text-gray-300 mb-2">To Our Beloved <span class="text-pink-400 font-semibold">Dada</span> & <span class="text-purple-400 font-semibold">Vauju</span></p>
+  <p class="text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
+    Two amazing people, one beautiful celebration. Today we celebrate the joy you bring into our lives and the love you share together.
+  </p>
+
+  <!-- Countdown / Age reveal -->
+  <div class="flex gap-4 mb-8" id="countBoxes">
+    <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
+      <div class="text-3xl font-bold text-pink-400" id="cDays">00</div>
+      <div class="text-xs text-gray-400 uppercase tracking-wider">Days</div>
     </div>
+    <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
+      <div class="text-3xl font-bold text-purple-400" id="cHours">00</div>
+      <div class="text-xs text-gray-400 uppercase tracking-wider">Hours</div>
+    </div>
+    <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
+      <div class="text-3xl font-bold text-blue-400" id="cMins">00</div>
+      <div class="text-xs text-gray-400 uppercase tracking-wider">Mins</div>
+    </div>
+    <div class="bg-white/10 backdrop-blur rounded-2xl p-4 min-w-[80px] border border-white/10">
+      <div class="text-3xl font-bold text-green-400" id="cSecs">00</div>
+      <div class="text-xs text-gray-400 uppercase tracking-wider">Secs</div>
+    </div>
+  </div>
 
-    <a href="#brother" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-3 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/30 transition-all hover:scale-105">
-      See Wishes ↓
-    </a>
-  </section>
+  <a href="#brother" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-3 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/30 transition-all hover:scale-105">
+    See Wishes ↓
+  </a>
+</section>
 
-  <!-- ═══════════════════ BROTHER ═══════════════════ -->
-  <section id="brother" class="relative min-h-screen flex items-center py-20 px-4">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
-      <div class="reveal">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-pink-500/20 border border-white/10">
-          <div class="ribbon">BROTHER</div>
-          <img
-            src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
-            alt="Birthday celebration"
-            class="w-full h-80 object-cover"
-          />
-        </div>
-      </div>
-      <div class="reveal space-y-6">
-        <h2 class="text-4xl md:text-5xl font-bold">
-          Happy Birthday, <span class="text-pink-400 font-['Pacifico']">Dada!</span>
-        </h2>
-        <p class="text-gray-300 leading-relaxed text-lg">
-          You're not just a brother — you're a protector, a guide, and a best friend. Every memory we've shared has made our bond stronger and our lives brighter.
-        </p>
-        <p class="text-gray-400 leading-relaxed">
-          From childhood mischief to adult milestones, you've always been there. Today, we celebrate YOU and all the incredible moments that make you the amazing person you are.
-        </p>
-        <div class="flex gap-3 flex-wrap">
-          <span class="bg-pink-500/20 text-pink-300 px-4 py-1 rounded-full text-sm border border-pink-500/30"> </span>
-          <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm border border-purple-500/30"> </span>
-          <span class="bg-blue-500/20 text-blue-300 px-4 py-1 rounded-full text-sm border border-blue-500/30"> </span>
-          <span class="bg-yellow-500/20 text-yellow-300 px-4 py-1 rounded-full text-sm border border-yellow-500/30"> </span>
-        </div>
-        <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img
-            src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif"
-            alt="Birthday cake"
-            class="w-full h-48 object-cover"
-          />
-        </div>
+<!-- ═══════════════════ BROTHER ═══════════════════ -->
+<section id="brother" class="relative min-h-screen flex items-center py-20 px-4">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
+    <div class="reveal">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-pink-500/20 border border-white/10">
+        <div class="ribbon">BROTHER</div>
+        <img
+                src="assets/tereey_nam.png"
+                alt="Birthday celebration"
+                class="w-full h-90 object-cover"
+        />
       </div>
     </div>
-  </section>
-
-  <!-- ═══════════════════ VAUJU ═══════════════════ -->
-  <section id="vauju" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
-      <div class="reveal order-2 md:order-1 space-y-6">
-        <h2 class="text-4xl md:text-5xl font-bold">
-          Happy Birthday, <span class="text-purple-400 font-['Pacifico']">Vauju!</span>
-        </h2>
-        <p class="text-gray-300 leading-relaxed text-lg">
-          You came into our lives and brought so much warmth, love, and happiness with you. Soon, you'll officially become our Vauju, but in our hearts, you've already become so much more — a dear sister and a beautiful part of our family.
-        </p>
-
-        <p class="text-gray-400 leading-relaxed">
-          Thank you for the love and happiness you bring to our brother and to everyone around you. As you begin this beautiful new chapter with him, may your journey together be filled with endless love, laughter, happiness, and countless beautiful memories. We can't wait to welcome you into our family as our Vauju. ❤️
-        </p>
-
-        <div class="flex gap-3 flex-wrap">
-          <span class="bg-pink-500/20 text-pink-300 px-4 py-1 rounded-full text-sm border border-pink-500/30"> </span>
-          <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm border border-purple-500/30"> </span>
-          <span class="bg-rose-500/20 text-rose-300 px-4 py-1 rounded-full text-sm border border-rose-500/30"> </span>
-          <span class="bg-amber-500/20 text-amber-300 px-4 py-1 rounded-full text-sm border border-amber-500/30"> </span>
-        </div>
-        <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img
-            src="https://media.giphy.com/media/l46Ctb2LpPv5aFjoE/giphy.gif"
-            alt="Birthday flowers"
-            class="w-full h-48 object-cover"
-          />
-        </div>
-      </div>
-      <div class="reveal order-1 md:order-2">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-500/20 border border-white/10">
-          <div class="ribbon" style="background: linear-gradient(135deg,#818cf8,#c084fc);">VAUJU</div>
-          <img
-            src="https://media.giphy.com/media/3o6ZTaGd0vNTHkYjyE/giphy.gif"
-            alt="Celebration"
-            class="w-full h-80 object-cover"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ TOGETHER ═══════════════════ -->
-  <section id="together" class="relative min-h-screen flex items-center py-20 px-4">
-    <div class="max-w-4xl mx-auto text-center w-full">
-      <div class="reveal space-y-8">
-        <h2 class="text-4xl md:text-6xl font-bold font-['Pacifico']">
-          <span class="text-pink-400">Dada</span> &
-          <span class="text-purple-400">Vauju</span>
-        </h2>
-        <p class="text-xl text-gray-300">Together You Are Magical ✨</p>
-
-        <!-- Love story timeline -->
-        <div class="relative mt-12">
-          <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-pink-500 via-purple-500 to-blue-500"></div>
-
-          <div class="space-y-16 relative">
-            <div class="reveal flex items-center gap-8 flex-col md:flex-row">
-              <div class="md:w-1/2 md:text-right">
-                <div class="glow-card rounded-2xl p-6 inline-block">
-                  <div class="text-3xl mb-2"> </div>
-                  <h3 class="text-xl font-bold text-pink-400 mb-1">Best Friends Forever</h3>
-                  <p class="text-gray-400 text-sm">From friendship to love — the most beautiful journey!</p>
-                </div>
-              </div>
-              <div class="w-4 h-4 bg-pink-500 rounded-full border-4 border-pink-900 z-10 shrink-0"></div>
-              <div class="md:w-1/2"></div>
-            </div>
-
-            <div class="reveal flex items-center gap-8 flex-col md:flex-row">
-              <div class="md:w-1/2"></div>
-              <div class="w-4 h-4 bg-purple-500 rounded-full border-4 border-purple-900 z-10 shrink-0"></div>
-              <div class="md:w-1/2">
-                <div class="glow-card rounded-2xl p-6 inline-block">
-                  <div class="text-3xl mb-2"> </div>
-                  <h3 class="text-xl font-bold text-purple-400 mb-1">The Perfect Match</h3>
-                  <p class="text-gray-400 text-sm">Two souls, one heart — made for each other!</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="reveal flex items-center gap-8 flex-col md:flex-row">
-              <div class="md:w-1/2 md:text-right">
-                <div class="glow-card rounded-2xl p-6 inline-block">
-                  <div class="text-3xl mb-2"> </div>
-                  <h3 class="text-xl font-bold text-blue-400 mb-1">Birthday Twins!</h3>
-                  <p class="text-gray-400 text-sm">What are the odds? Born to celebrate together!</p>
-                </div>
-              </div>
-              <div class="w-4 h-4 bg-blue-500 rounded-full border-4 border-blue-900 z-10 shrink-0"></div>
-              <div class="md:w-1/2"></div>
-            </div>
-
-            <div class="reveal flex items-center gap-8 flex-col md:flex-row">
-              <div class="md:w-1/2"></div>
-              <div class="w-4 h-4 bg-green-500 rounded-full border-4 border-green-900 z-10 shrink-0"></div>
-              <div class="md:w-1/2">
-                <div class="glow-card rounded-2xl p-6 inline-block">
-                  <div class="text-3xl mb-2"> </div>
-                  <h3 class="text-xl font-bold text-green-400 mb-1">Forever & Always</h3>
-                  <p class="text-gray-400 text-sm">Growing old together, still holding hands!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GIF Row -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-          <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
-            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Party" class="w-full h-40 object-cover" />
-          </div>
-          <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
-            <img src="https://media.giphy.com/media/l4pTdcifPZLpD4fry/giphy.gif" alt="Cheers" class="w-full h-40 object-cover" />
-          </div>
-          <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
-            <img src="https://media.giphy.com/media/26BRBKqUiq586bRVm/giphy.gif" alt="Celebration" class="w-full h-40 object-cover" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ QR CODE SECTION ═══════════════════ -->
-  <section id="qrcode" class="relative min-h-screen flex items-center py-20 px-4">
-    <div class="max-w-4xl mx-auto w-full text-center">
-      <div class="reveal space-y-8">
-        <h2 class="text-4xl md:text-6xl font-bold font-['Pacifico']">
-          <span class="bg-gradient-to-r from-pink-400 via-yellow-400 to-red-400 bg-clip-text text-transparent">Disaster Fund</span>
-        </h2>
-        <p class="text-xl text-gray-300">Scan the QR to contribute to Dada & Vauju's Birthday Chaos Fund</p>
-
-        <!-- QR Card -->
-        <div class="reveal inline-block">
-          <div class="glow-card rounded-3xl p-8 relative overflow-hidden">
-            <div class="ribbon" style="background: linear-gradient(135deg,#f97316,#ef4444);">DONATE</div>
-            <!-- QR Code (placeholder - replace src with your actual QR) -->
-            <div class="bg-white rounded-2xl p-4 mb-6 inline-block">
-              <img
-                src="assets/esewa.png"
-                alt="Birthday Disaster Fund QR Code"
-                class="w-56 h-56 mx-auto"
-              />
-            </div>
-            <h3 class="text-2xl font-bold text-orange-400 mb-2"> </h3>
-            <p class="text-gray-400 max-w-md mx-auto">
-              "Every rupee goes towards cake, balloons, and cleaning up after Dada's dance moves"
-            </p>
-            <div class="flex justify-center gap-2 mt-4 flex-wrap">
-              <span class="bg-orange-500/20 text-orange-300 px-4 py-1 rounded-full text-sm border border-orange-500/30">Cake Fund</span>
-              <span class="bg-red-500/20 text-red-300 px-4 py-1 rounded-full text-sm border border-red-500/30">Emergency Snacks</span>
-              <span class="bg-yellow-500/20 text-yellow-300 px-4 py-1 rounded-full text-sm border border-yellow-500/30">Party supplies</span>
-            </div>
-            <!-- Funny Disclaimer -->
-            <p class="text-xs text-gray-500 mt-6 italic">
-              *No actual money needed! This is just for laughs. But if you really want to send gifts... we won't say no *
-            </p>
-          </div>
-        </div>
-
-        <!-- Fun stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          <div class="glow-card rounded-2xl p-4">
-            <div class="text-3xl mb-1"> </div>
-            <div class="text-2xl font-bold text-pink-400">100%</div>
-            <div class="text-xs text-gray-400">Cake Budget</div>
-          </div>
-          <div class="glow-card rounded-2xl p-4">
-            <div class="text-3xl mb-1"> </div>
-            <div class="text-2xl font-bold text-purple-400">∞</div>
-            <div class="text-xs text-gray-400">Dance Moves</div>
-          </div>
-          <div class="glow-card rounded-2xl p-4">
-            <div class="text-3xl mb-1"> </div>
-            <div class="text-2xl font-bold text-blue-400">0</div>
-            <div class="text-xs text-gray-400">Gift Returns</div>
-          </div>
-          <div class="glow-card rounded-2xl p-4">
-            <div class="text-3xl mb-1"> </div>
-            <div class="text-2xl font-bold text-green-400">24/7</div>
-            <div class="text-xs text-gray-400">Celebration</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ GALLERY ═══════════════════ -->
-  <section id="gallery" class="relative min-h-screen py-20 px-4 bg-gradient-to-b from-transparent via-blue-900/10 to-transparent">
-    <div class="max-w-6xl mx-auto w-full">
-      <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-4">
-        <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Memory Gallery</span>
+    <div class="reveal space-y-6">
+      <h2 class="text-4xl md:text-5xl font-bold">
+        Happy Birthday, <span class="text-pink-400 font-['Pacifico']">Dada!</span>
       </h2>
-      <p class="reveal text-center text-gray-400 mb-12">All the beautiful moments we've captured together</p>
-
-      <!-- Gallery Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryGrid">
-        <!-- Sample images - replace with your own -->
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop" alt="Birthday Celebration" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=300&fit=crop" alt="Party Time" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop" alt="Cake cutting" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=300&fit=crop" alt="Dancing" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Food" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop" alt="Confetti" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=300&fit=crop" alt="Music" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
-        <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1546554137-f86b9593a222?w=400&h=300&fit=crop" alt="Fireworks" class="w-full h-48 object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <span class="text-sm text-gray-200"> </span>
-          </div>
-        </div>
+      <p class="text-gray-300 leading-relaxed text-lg">
+        You're not just a brother — you're a protector, a guide, and a best friend. Every memory we've shared has made our bond stronger and our lives brighter.
+      </p>
+      <p class="text-gray-400 leading-relaxed">
+        From childhood mischief to adult milestones, you've always been there. Today, we celebrate YOU and all the incredible moments that make you the amazing person you are.
+      </p>
+      <div class="flex gap-3 flex-wrap">
+        <span class="bg-pink-500/20 text-pink-300 px-4 py-1 rounded-full text-sm border border-pink-500/30"> </span>
+        <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm border border-purple-500/30"> </span>
+        <span class="bg-blue-500/20 text-blue-300 px-4 py-1 rounded-full text-sm border border-blue-500/30"> </span>
+        <span class="bg-yellow-500/20 text-yellow-300 px-4 py-1 rounded-full text-sm border border-yellow-500/30"> </span>
       </div>
-
-      <!-- Add Photos Button -->
-      <div class="reveal text-center mt-10">
-        <button onclick="document.getElementById('photoUpload').click()" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/30 transition-all hover:scale-105">
-           Add More Photos
-        </button>
-        <input type="file" id="photoUpload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)" />
-        <p class="text-gray-500 text-sm mt-3">Click to add your own photos to the gallery</p>
+      <div class="rounded-2xl overflow-hidden border border-white/10">
+        <img
+                src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NDMybG5xa3NscmxraWFzNWJhdmp6aWpsbXFnNzBxbmtrN3hqcTBsOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11sBLVxNs7v6WA/giphy.gif"
+                alt="Birthday cake"
+                class="w-full h-48 object-cover"
+        />
       </div>
-
-      <!-- Uploaded Photos Container -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6" id="uploadedPhotos"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══════════════════ SOUND SECTION ═══════════════════ -->
-  <section id="sound" class="relative py-20 px-4">
-    <div class="max-w-4xl mx-auto w-full">
-      <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-12">
-        <span class="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Birthday Playlist</span>
+<!-- ═══════════════════ VAUJU ═══════════════════ -->
+<section id="vauju" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
+    <div class="reveal order-2 md:order-1 space-y-6">
+      <h2 class="text-4xl md:text-5xl font-bold">
+        Happy Birthday, <span class="text-purple-400 font-['Pacifico']">Vauju!</span>
       </h2>
+      <p class="text-gray-300 leading-relaxed text-lg">
+        You came into our lives and brought so much warmth, love, and happiness with you. Soon, you'll officially become our Vauju, but in our hearts, you've already become so much more — a dear sister and a beautiful part of our family.
+      </p>
 
-      <div class="reveal glow-card rounded-3xl p-8 text-center">
-        <div class="text-8xl mb-6 animate-bounce"> </div>
-        <p class="text-gray-300 mb-6">Click the buttons to set the party mood!</p>
+      <p class="text-gray-400 leading-relaxed">
+        Thank you for the love and happiness you bring to our brother and to everyone around you. As you begin this beautiful new chapter with him, may your journey together be filled with endless love, laughter, happiness, and countless beautiful memories. We can't wait to welcome you into our family as our Vauju. ❤️
+      </p>
 
-        <!-- Sound Buttons -->
-        <div class="flex flex-wrap justify-center gap-4">
-          <button onclick="playSound('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')" class="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2">
-            <span> </span> Party Music
-          </button>
-          <button onclick="playSound('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2">
-            <span> </span> Celebration Vibes
-          </button>
-          <button onclick="playSound('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2">
-            <span> </span> Dance Beat
-          </button>
-          <button onclick="stopSound()" class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2">
-            <span> </span> Stop Music
-          </button>
-        </div>
-
-        <!-- Now Playing -->
-        <div id="nowPlaying" class="mt-6 text-gray-400 hidden">
-          <span class="animate-pulse inline-block mr-2"> </span> Now Playing: <span id="currentSong" class="text-purple-400"></span>
-        </div>
-
-        <!-- Volume Control -->
-        <div class="mt-6 flex items-center justify-center gap-4">
-          <span class="text-2xl"> </span>
-          <input type="range" id="volumeSlider" min="0" max="100" value="50" onchange="setVolume(this.value)" class="w-48 accent-purple-500" />
-          <span class="text-2xl"> </span>
-        </div>
+      <div class="flex gap-3 flex-wrap">
+        <span class="bg-pink-500/20 text-pink-300 px-4 py-1 rounded-full text-sm border border-pink-500/30"> </span>
+        <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm border border-purple-500/30"> </span>
+        <span class="bg-rose-500/20 text-rose-300 px-4 py-1 rounded-full text-sm border border-rose-500/30"> </span>
+        <span class="bg-amber-500/20 text-amber-300 px-4 py-1 rounded-full text-sm border border-amber-500/30"> </span>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-white/10">
+        <img
+                src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmtrM3pkam5xbnQ3dnRoMGVnYWpxNmF6YnVmOHZ0YmM2cjUxb240aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CciM7ZRcjqY6P7HHdd/giphy.gif"
+                alt="Birthday flowers"
+                class="w-full h-100 object-cover"
+        />
       </div>
     </div>
-  </section>
+    <div class="reveal order-1 md:order-2">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-500/20 border border-white/10">
+        <div class="ribbon" style="background: linear-gradient(135deg,#818cf8,#c084fc);">VAUJU</div>
+        <img
+                src="assets/vauju_with_pizza.png"
+                alt="Celebration"
+                class="w-full h-80 object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══════════════════ WISHES ═══════════════════ -->
-  <section id="wishes" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-pink-900/10 to-transparent">
-    <div class="max-w-4xl mx-auto w-full">
-      <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-16 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-        Birthday Wishes
+<!-- ═══════════════════ CAKE CUTTING ═══════════════════ -->
+<section id="cakecutting" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent">
+  <div class="max-w-5xl mx-auto w-full text-center">
+    <h2 class="reveal text-4xl md:text-6xl font-bold font-['Pacifico'] mb-4">
+      <span class="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">Cake Cutting Time!</span>
+    </h2>
+    <p class="reveal text-gray-400 mb-12">Make a wish, blow the candles, and let the chaos begin </p>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Cake Cutting GIF -->
+      <div class="reveal glow-card rounded-3xl p-4 relative overflow-hidden">
+        <div class="ribbon" style="background: linear-gradient(135deg,#facc15,#f97316);">CAKE!</div>
+        <img
+                src="assets/cake_cutting.png"
+                alt="Cake cutting"
+                class="w-full h-90 object-cover rounded-2xl"
+        />
+        <p class="text-gray-300 mt-4 text-sm">Careful with that knife, Dada! </p>
+      </div>
+
+      <!-- Funny Cartoon GIF -->
+      <div class="reveal glow-card rounded-3xl p-4 relative overflow-hidden">
+        <div class="ribbon" style="background: linear-gradient(135deg,#38bdf8,#818cf8);">FUNNY</div>
+        <img
+                src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGl0a3A4amlsOWZ4ZnpydmxyaWNqbHZ5dGdtaDE3YzBwOTRmbWN5bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q6rXPWgZKUHgYpwkWb/giphy.gif"
+                alt="Funny cartoon celebration"
+                class="w-full h-64 object-cover rounded-2xl"
+        />
+        <p class="text-gray-300 mt-4 text-sm">This is basically Dada's dance move preview </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TOGETHER ═══════════════════ -->
+<section id="together" class="relative min-h-screen flex items-center py-20 px-4">
+  <div class="max-w-4xl mx-auto text-center w-full">
+    <div class="reveal space-y-8">
+      <h2 class="text-4xl md:text-6xl font-bold font-['Pacifico']">
+        <span class="text-pink-400">Dada</span> &
+        <span class="text-purple-400">Vauju</span>
       </h2>
+      <p class="text-xl text-gray-300">Together You Are Magical ✨</p>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Wish Card 1 -->
-        <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-          <div class="text-6xl mb-4"> </div>
-          <h3 class="text-2xl font-bold text-pink-400 mb-3">Health & Happiness</h3>
-          <p class="text-gray-300 leading-relaxed">
-            May God bless you both with good health, boundless happiness, and all the wonderful things life has to offer. Every day ahead is filled with joy!
-          </p>
-          <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
-        </div>
+      <!-- Love story timeline -->
+      <div class="relative mt-12">
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-pink-500 via-purple-500 to-blue-500"></div>
 
-        <!-- Wish Card 2 -->
-        <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-          <div class="text-6xl mb-4"> </div>
-          <h3 class="text-2xl font-bold text-purple-400 mb-3">Love & Togetherness</h3>
-          <p class="text-gray-300 leading-relaxed">
-            May the love between you two grow stronger with each passing year. May you continue to inspire everyone around you with your beautiful bond.
-          </p>
-          <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
-        </div>
-
-        <!-- Wish Card 3 -->
-        <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-          <div class="text-6xl mb-4"> </div>
-          <h3 class="text-2xl font-bold text-blue-400 mb-3">Dreams & Success</h3>
-          <p class="text-gray-300 leading-relaxed">
-            May all your dreams come true this year. May you achieve new heights of success and create memories that last a lifetime together.
-          </p>
-          <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
-        </div>
-
-        <!-- Wish Card 4 -->
-        <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-          <div class="text-6xl mb-4"> </div>
-          <h3 class="text-2xl font-bold text-green-400 mb-3">Adventure & Fun</h3>
-          <p class="text-gray-300 leading-relaxed">
-            May this year bring exciting adventures, unexpected surprises, and endless fun. Here's to laughing together, traveling together, and making the best memories!
-          </p>
-          <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
-        </div>
-      </div>
-
-      <!-- Typewriter message -->
-      <div class="reveal mt-16 text-center">
-        <div class="bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10 inline-block max-w-2xl">
-          <p class="text-lg text-gray-200 typewriter" id="typewriterText"></p>
-        </div>
-      </div>
-
-      <!-- Final Message -->
-      <div class="reveal mt-16 text-center space-y-4">
-        <div class="text-6xl heartbeat inline-block">❤️</div>
-        <p class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-['Pacifico']">
-          We Love You Both So Much!
-        </p>
-        <p class="text-gray-400">— With all our love, your loving family </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer class="text-center py-8 border-t border-white/10 bg-black/30">
-    <p class="text-gray-500 text-sm">Made with ❤️ | Happy Birthday Dada & Vauju</p>
-    <div class="text-3xl mt-2">  </div>
-  </footer>
-
-  <!-- ═══════════════════ JavaScript ═══════════════════ -->
-  <script>
-    // ── Stars Background ──
-    (function initStars() {
-      const starsEl = document.getElementById('stars');
-      for (let i = 0; i < 120; i++) {
-        const s = document.createElement('div');
-        s.className = 'star';
-        s.style.left = Math.random() * 100 + '%';
-        s.style.top = Math.random() * 100 + '%';
-        s.style.animationDelay = Math.random() * 3 + 's';
-        s.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-        starsEl.appendChild(s);
-      }
-    })();
-
-    // ── Confetti Generator ──
-    function spawnConfetti(count = 60) {
-      const colors = ['#f472b6', '#c084fc', '#818cf8', '#38bdf8', '#facc15', '#34d399', '#fb923c'];
-      for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-          const c = document.createElement('div');
-          c.className = 'confetti-piece';
-          c.style.left = Math.random() * 100 + 'vw';
-          c.style.background = colors[Math.floor(Math.random() * colors.length)];
-          c.style.animationDuration = (2 + Math.random() * 3) + 's';
-          c.style.width = (6 + Math.random() * 8) + 'px';
-          c.style.height = (10 + Math.random() * 14) + 'px';
-          c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-          document.body.appendChild(c);
-          setTimeout(() => c.remove(), 5000);
-        }, i * 40);
-      }
-    }
-
-    // ── Balloon Generator ──
-    function spawnBalloons(count = 12) {
-      const emojis = [' ', ' ', ' ', ' ', ' ', ' ', ' '];
-      for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-          const b = document.createElement('div');
-          b.className = 'balloon';
-          b.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          b.style.left = Math.random() * 100 + 'vw';
-          b.style.animationDuration = (4 + Math.random() * 4) + 's';
-          b.style.fontSize = (50 + Math.random() * 40) + 'px';
-          document.body.appendChild(b);
-          setTimeout(() => b.remove(), 9000);
-        }, i * 300);
-      }
-    }
-
-    // ── Sparkle on Click ──
-    document.addEventListener('click', (e) => {
-      const emojis = ['✨', ' ', ' ', ' ', ' ', ' '];
-      for (let i = 0; i < 6; i++) {
-        const sp = document.createElement('div');
-        sp.className = 'sparkle';
-        sp.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        sp.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
-        sp.style.top = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
-        sp.style.fontSize = (16 + Math.random() * 16) + 'px';
-        document.body.appendChild(sp);
-        setTimeout(() => sp.remove(), 900);
-      }
-    });
-
-    // ── Particle Canvas ──
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = -(Math.random() * 0.3 + 0.1);
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.5 + 0.2;
-        this.hue = Math.random() * 60 + 280; // purple-pink range
-      }
-      update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.opacity -= 0.001;
-        if (this.opacity <= 0 || this.y < -10) this.reset();
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 80%, 70%, ${this.opacity})`;
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // ── Scroll Reveal ──
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          revealObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(r => revealObserver.observe(r));
-
-    (function countdown() {
-      function getBirthday() {
-        const now = new Date();
-        let year = now.getFullYear();
-        let bday = new Date(year, 8, 15);
-        if (now > bday) bday = new Date(year + 1, 8, 15);
-        return bday;
-      }
-      let nextBday = getBirthday();
-
-      function tick() {
-        const now = new Date();
-        let diff = nextBday - now;
-        if (diff < 0) { nextBday = getBirthday(); diff = nextBday - now; }
-
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff % 86400000) / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-
-        document.getElementById('cDays').textContent = String(d).padStart(2, '0');
-        document.getElementById('cHours').textContent = String(h).padStart(2, '0');
-        document.getElementById('cMins').textContent = String(m).padStart(2, '0');
-        document.getElementById('cSecs').textContent = String(s).padStart(2, '0');
-      }
-      tick();
-      setInterval(tick, 1000);
-    })();
-
-    (function typewriter() {
-      const messages = [
-        "Here's to another year of love, laughter, and beautiful memories together. Happy Birthday to the best Dada and Vauju in the world! ",
-        "May your birthdays be as wonderful and special as you both are. Wishing you a lifetime of love and happiness! "
-      ];
-      const el = document.getElementById('typewriterText');
-      let msgIdx = 0, charIdx = 0, deleting = false;
-
-      function type() {
-        const current = messages[msgIdx];
-        if (!deleting) {
-          el.textContent = current.substring(0, charIdx + 1);
-          charIdx++;
-          if (charIdx === current.length) {
-            setTimeout(() => { deleting = true; type(); }, 3000);
-            return;
-          }
-        } else {
-          el.textContent = current.substring(0, charIdx - 1);
-          charIdx--;
-          if (charIdx === 0) {
-            deleting = false;
-            msgIdx = (msgIdx + 1) % messages.length;
-          }
-        }
-        setTimeout(type, deleting ? 30 : 60);
-      }
-      type();
-    })();
-
-    window.addEventListener('load', () => {
-      setTimeout(() => spawnConfetti(80), 500);
-      setTimeout(() => spawnBalloons(15), 1200);
-    });
-
-    const musicBtn = document.getElementById('musicBtn');
-    let musicPlaying = false;
-    musicBtn.addEventListener('click', () => {
-      musicPlaying = !musicPlaying;
-      musicBtn.textContent = musicPlaying ? ' ' : ' ';
-      if (musicPlaying) {
-        spawnConfetti(40);
-        spawnBalloons(8);
-      }
-    });
-
-    let currentAudio = null;
-
-    function playSound(url) {
-      if (currentAudio) currentAudio.pause();
-      currentAudio = new Audio(url);
-      currentAudio.volume = document.getElementById('volumeSlider').value / 100;
-      currentAudio.loop = true;
-      currentAudio.play();
-      document.getElementById('nowPlaying').classList.remove('hidden');
-      document.getElementById('currentSong').textContent = url.split('/').pop();
-    }
-
-    function stopSound() {
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio = null;
-      }
-      document.getElementById('nowPlaying').classList.add('hidden');
-    }
-
-    function setVolume(val) {
-      if (currentAudio) currentAudio.volume = val / 100;
-    }
-
-    function handlePhotoUpload(event) {
-      const files = event.target.files;
-      const container = document.getElementById('uploadedPhotos');
-      for (let file of files) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const div = document.createElement('div');
-          div.className = 'reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer';
-          div.innerHTML = `
-            <img src="${e.target.result}" alt="Uploaded Photo" class="w-full h-48 object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <span class="text-sm text-gray-200">Your Memory </span>
+        <div class="space-y-16 relative">
+          <div class="reveal flex items-center gap-8 flex-col md:flex-row">
+            <div class="md:w-1/2 md:text-right">
+              <div class="glow-card rounded-2xl p-6 inline-block">
+                <div class="text-3xl mb-2"> </div>
+                <h3 class="text-xl font-bold text-pink-400 mb-1">Best Friends Forever</h3>
+                <p class="text-gray-400 text-sm">From friendship to love — the most beautiful journey!</p>
+              </div>
             </div>
-            <button onclick="this.parentElement.remove()" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-lg">×</button>
-          `;
-          container.appendChild(div);
-          // Observe new element
-          revealObserver.observe(div);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+            <div class="w-4 h-4 bg-pink-500 rounded-full border-4 border-pink-900 z-10 shrink-0"></div>
+            <div class="md:w-1/2"></div>
+          </div>
 
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      document.querySelectorAll('section').forEach(s => {
-        if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
-      });
-      navLinks.forEach(l => {
-        l.classList.remove('text-pink-400', 'text-purple-400');
-        if (l.getAttribute('href') === '#' + current) {
-          l.classList.add('text-pink-400');
-        }
-      });
-    });
-  </script>
+          <div class="reveal flex items-center gap-8 flex-col md:flex-row">
+            <div class="md:w-1/2"></div>
+            <div class="w-4 h-4 bg-purple-500 rounded-full border-4 border-purple-900 z-10 shrink-0"></div>
+            <div class="md:w-1/2">
+              <div class="glow-card rounded-2xl p-6 inline-block">
+                <div class="text-3xl mb-2"> </div>
+                <h3 class="text-xl font-bold text-purple-400 mb-1">The Perfect Match</h3>
+                <p class="text-gray-400 text-sm">Two souls, one heart — made for each other!</p>
+              </div>
+            </div>
+          </div>
 
+          <div class="reveal flex items-center gap-8 flex-col md:flex-row">
+            <div class="md:w-1/2 md:text-right">
+              <div class="glow-card rounded-2xl p-6 inline-block">
+                <div class="text-3xl mb-2"> </div>
+                <h3 class="text-xl font-bold text-blue-400 mb-1">Birthday Twins!</h3>
+                <p class="text-gray-400 text-sm">What are the odds? Born to celebrate together!</p>
+              </div>
+            </div>
+            <div class="w-4 h-4 bg-blue-500 rounded-full border-4 border-blue-900 z-10 shrink-0"></div>
+            <div class="md:w-1/2"></div>
+          </div>
+
+          <div class="reveal flex items-center gap-8 flex-col md:flex-row">
+            <div class="md:w-1/2"></div>
+            <div class="w-4 h-4 bg-green-500 rounded-full border-4 border-green-900 z-10 shrink-0"></div>
+            <div class="md:w-1/2">
+              <div class="glow-card rounded-2xl p-6 inline-block">
+                <div class="text-3xl mb-2"> </div>
+                <h3 class="text-xl font-bold text-green-400 mb-1">Forever & Always</h3>
+                <p class="text-gray-400 text-sm">Growing old together, still holding hands!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIF Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+        <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
+          <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Party" class="w-full h-40 object-cover" />
+        </div>
+        <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmNpcWRuenQzcjRkaWlmZXB4ZWx2YWd4cng3dW1wM2F3dng4MWdvdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OXY6TyrhUNdlu/giphy.gif" alt="Cheers" class="w-full h-40 object-cover" />
+        </div>
+        <div class="reveal rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-transform">
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTRsemx3bHdrbGpyMTlqNGg4aXFibzZlN2l5eWtzNzhuMGFmcGx2aSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/xT8qB6yf3ZmoDscN7a/giphy.gif" alt="Celebration" class="w-full h-40 object-cover" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ QR CODE SECTION ═══════════════════ -->
+<section id="qrcode" class="relative min-h-screen flex items-center py-20 px-4">
+  <div class="max-w-4xl mx-auto w-full text-center">
+    <div class="reveal space-y-8">
+      <h2 class="text-4xl md:text-6xl font-bold font-['Pacifico']">
+        <span class="bg-gradient-to-r from-pink-400 via-yellow-400 to-red-400 bg-clip-text text-transparent">Disaster Fund</span>
+      </h2>
+      <p class="text-xl text-gray-300">Scan the QR to contribute to Dada & Vauju's Birthday Chaos Fund</p>
+
+      <!-- QR Card -->
+      <div class="reveal inline-block">
+        <div class="glow-card rounded-3xl p-8 relative overflow-hidden">
+          <div class="ribbon" style="background: linear-gradient(135deg,#f97316,#ef4444);">DONATE</div>
+          <!-- QR Code (placeholder - replace src with your actual QR) -->
+          <div class="bg-white rounded-2xl p-4 mb-6 inline-block">
+            <img
+                    src="assets/esewa.png"
+                    alt="Birthday Disaster Fund QR Code"
+                    class="w-56 h-56 mx-auto"
+            />
+          </div>
+          <h3 class="text-2xl font-bold text-orange-400 mb-2"> </h3>
+          <p class="text-gray-400 max-w-md mx-auto">
+            "Every rupee goes towards cake, balloons, and cleaning up after Dada's dance moves"
+          </p>
+          <div class="flex justify-center gap-2 mt-4 flex-wrap">
+            <span class="bg-orange-500/20 text-orange-300 px-4 py-1 rounded-full text-sm border border-orange-500/30">Cake Fund</span>
+            <span class="bg-red-500/20 text-red-300 px-4 py-1 rounded-full text-sm border border-red-500/30">Emergency Snacks</span>
+            <span class="bg-yellow-500/20 text-yellow-300 px-4 py-1 rounded-full text-sm border border-yellow-500/30">Party supplies</span>
+          </div>
+          <!-- Funny Disclaimer -->
+          <p class="text-xs text-gray-500 mt-6 italic">
+            *No actual money needed! This is just for laughs. But if you really want to send gifts... we won't say no *
+          </p>
+        </div>
+      </div>
+
+      <!-- Fun stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+        <div class="glow-card rounded-2xl p-4">
+          <div class="text-3xl mb-1"> </div>
+          <div class="text-2xl font-bold text-pink-400">100%</div>
+          <div class="text-xs text-gray-400">Cake Budget</div>
+        </div>
+        <div class="glow-card rounded-2xl p-4">
+          <div class="text-3xl mb-1"> </div>
+          <div class="text-2xl font-bold text-purple-400">∞</div>
+          <div class="text-xs text-gray-400">Dance Moves</div>
+        </div>
+        <div class="glow-card rounded-2xl p-4">
+          <div class="text-3xl mb-1"> </div>
+          <div class="text-2xl font-bold text-blue-400">0</div>
+          <div class="text-xs text-gray-400">Gift Returns</div>
+        </div>
+        <div class="glow-card rounded-2xl p-4">
+          <div class="text-3xl mb-1"> </div>
+          <div class="text-2xl font-bold text-green-400">24/7</div>
+          <div class="text-xs text-gray-400">Celebration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ GALLERY ═══════════════════ -->
+<section id="gallery" class="relative min-h-screen py-20 px-4 bg-gradient-to-b from-transparent via-blue-900/10 to-transparent">
+  <div class="max-w-6xl mx-auto w-full">
+    <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-4">
+      <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Memory Gallery</span>
+    </h2>
+    <p class="reveal text-center text-gray-400 mb-12">All the beautiful moments we've captured together</p>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryGrid">
+      <!-- Sample images - replace with your own -->
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop" alt="Birthday Celebration" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=300&fit=crop" alt="Party Time" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop" alt="Cake cutting" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=300&fit=crop" alt="Dancing" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Food" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop" alt="Confetti" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=300&fit=crop" alt="Music" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1546554137-f86b9593a222?w=400&h=300&fit=crop" alt="Fireworks" class="w-full h-48 object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+          <span class="text-sm text-gray-200"> </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Photos Button -->
+    <div class="reveal text-center mt-10">
+      <button onclick="document.getElementById('photoUpload').click()" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/30 transition-all hover:scale-105">
+        Add More Photos
+      </button>
+      <input type="file" id="photoUpload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)" />
+      <p class="text-gray-500 text-sm mt-3">Click to add your own photos to the gallery</p>
+    </div>
+
+    <!-- Uploaded Photos Container -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6" id="uploadedPhotos"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WISHES ═══════════════════ -->
+<section id="wishes" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-pink-900/10 to-transparent">
+  <div class="max-w-4xl mx-auto w-full">
+    <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-16 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+      Birthday Wishes
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Wish Card 1 -->
+      <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
+        <div class="text-6xl mb-4"> </div>
+        <h3 class="text-2xl font-bold text-pink-400 mb-3">Health & Happiness</h3>
+        <p class="text-gray-300 leading-relaxed">
+          May God bless you both with good health, boundless happiness, and all the wonderful things life has to offer. Every day ahead is filled with joy!
+        </p>
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+      </div>
+
+      <!-- Wish Card 2 -->
+      <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
+        <div class="text-6xl mb-4"> </div>
+        <h3 class="text-2xl font-bold text-purple-400 mb-3">Love & Togetherness</h3>
+        <p class="text-gray-300 leading-relaxed">
+          May the love between you two grow stronger with each passing year. May you continue to inspire everyone around you with your beautiful bond.
+        </p>
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+      </div>
+
+      <!-- Wish Card 3 -->
+      <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
+        <div class="text-6xl mb-4"> </div>
+        <h3 class="text-2xl font-bold text-blue-400 mb-3">Dreams & Success</h3>
+        <p class="text-gray-300 leading-relaxed">
+          May all your dreams come true this year. May you achieve new heights of success and create memories that last a lifetime together.
+        </p>
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+      </div>
+
+      <!-- Wish Card 4 -->
+      <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
+        <div class="text-6xl mb-4"> </div>
+        <h3 class="text-2xl font-bold text-green-400 mb-3">Adventure & Fun</h3>
+        <p class="text-gray-300 leading-relaxed">
+          May this year bring exciting adventures, unexpected surprises, and endless fun. Here's to laughing together, traveling together, and making the best memories!
+        </p>
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+      </div>
+    </div>
+
+    <!-- Typewriter message -->
+    <div class="reveal mt-16 text-center">
+      <div class="bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10 inline-block max-w-2xl">
+        <p class="text-lg text-gray-200 typewriter" id="typewriterText"></p>
+      </div>
+    </div>
+
+    <!-- Final Message -->
+    <div class="reveal mt-16 text-center space-y-4">
+      <div class="text-6xl heartbeat inline-block">❤️</div>
+      <p class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-['Pacifico']">
+        We Love You Both So Much!
+      </p>
+      <p class="text-gray-400">— With all our love, your loving family </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="text-center py-8 border-t border-white/10 bg-black/30">
+  <p class="text-gray-500 text-sm">Made with ❤️ | Happy Birthday Dada & Vauju</p>
+  <div class="text-3xl mt-2">  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
