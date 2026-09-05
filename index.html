@@ -338,146 +338,240 @@
 </section>
 
 <!-- ═══════════════════ GALLERY ═══════════════════ -->
+```html
+<!-- ═══════════════════ GALLERY ═══════════════════ -->
 <section id="gallery" class="relative min-h-screen py-20 px-4 bg-gradient-to-b from-transparent via-blue-900/10 to-transparent">
   <div class="max-w-6xl mx-auto w-full">
+
+    <!-- Gallery Heading -->
     <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-4">
-      <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Memory Gallery</span>
+      <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        Memory Gallery
+      </span>
     </h2>
-    <p class="reveal text-center text-gray-400 mb-12">All the beautiful moments we've captured together</p>
+
+    <p class="reveal text-center text-gray-400 mb-14">
+      All the beautiful moments we've captured together
+    </p>
 
     <!-- Gallery Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryGrid">
-      <!-- Sample images - replace with your own -->
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop" alt="Birthday Celebration" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=300&fit=crop" alt="Party Time" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop" alt="Cake cutting" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=300&fit=crop" alt="Dancing" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Food" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop" alt="Confetti" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=300&fit=crop" alt="Music" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-      <div class="reveal group relative rounded-2xl overflow-hidden border border-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1546554137-f86b9593a222?w=400&h=300&fit=crop" alt="Fireworks" class="w-full h-48 object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <span class="text-sm text-gray-200"> </span>
-        </div>
-      </div>
-    </div>
+    <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
+            id="galleryGrid"
+    >
 
-    <!-- Add Photos Button -->
-    <div class="reveal text-center mt-10">
-      <button onclick="document.getElementById('photoUpload').click()" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/30 transition-all hover:scale-105">
-        Add More Photos
-      </button>
-      <input type="file" id="photoUpload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)" />
-      <p class="text-gray-500 text-sm mt-3">Click to add your own photos to the gallery</p>
-    </div>
+      <!-- Image 1 -->
+      <div class="reveal group relative rounded-3xl overflow-hidden border border-white/10
+                  hover:scale-[1.03] hover:border-purple-400/40
+                  transition-all duration-500 cursor-pointer shadow-xl">
 
-    <!-- Uploaded Photos Container -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6" id="uploadedPhotos"></div>
+        <img
+                src="assets/dai_vauju.png"
+                alt="Birthday Celebration"
+                class="w-full h-90 md:h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-500
+                    flex items-end p-6">
+
+          <span class="text-lg font-semibold text-white">
+            Smiling our way through life together! 😊💕
+          </span>
+
+        </div>
+      </div>
+
+
+      <!-- Image 2 -->
+      <div class="reveal group relative rounded-3xl overflow-hidden border border-white/10
+                  hover:scale-[1.03] hover:border-pink-400/40
+                  transition-all duration-500 cursor-pointer shadow-xl">
+
+        <img
+                src="assets/funny_moment.png"
+                alt="Party Time"
+                class="w-full h-90 md:h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-500
+                    flex items-end p-6">
+
+          <span class="text-lg font-semibold text-white">
+           Watch Your Steps..
+          </span>
+
+        </div>
+      </div>
+
+
+      <!-- Image 3 -->
+      <div class="reveal group relative rounded-3xl overflow-hidden border border-white/10
+                  hover:scale-[1.03] hover:border-blue-400/40
+                  transition-all duration-500 cursor-pointer shadow-xl">
+
+        <img
+                src="assets/sunset.png"
+                alt="Birthday Cake"
+                class="w-full h-72 md:h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-500
+                    flex items-end p-6">
+
+          <span class="text-lg font-semibold text-white">
+            Found the path to coastal cycle and a whole lot more. ❤️
+          </span>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
+
 <!-- ═══════════════════ WISHES ═══════════════════ -->
-<section id="wishes" class="relative min-h-screen flex items-center py-20 px-4 bg-gradient-to-b from-transparent via-pink-900/10 to-transparent">
-  <div class="max-w-4xl mx-auto w-full">
-    <h2 class="reveal text-4xl md:text-6xl font-bold text-center font-['Pacifico'] mb-16 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+<section
+        id="wishes"
+        class="relative min-h-screen flex items-center py-24 px-4
+         bg-gradient-to-b from-transparent via-pink-900/10 to-transparent"
+>
+  <div class="max-w-5xl mx-auto w-full">
+
+    <!-- Heading -->
+    <h2
+            class="reveal text-4xl md:text-6xl font-bold text-center
+             font-['Pacifico'] mb-16
+             bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400
+             bg-clip-text text-transparent"
+    >
       Birthday Wishes
     </h2>
 
-    <div class="grid md:grid-cols-2 gap-8">
+
+    <!-- Wish Cards -->
+    <div class="grid sm:grid-cols-2 gap-6 md:gap-8">
+
       <!-- Wish Card 1 -->
       <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-        <div class="text-6xl mb-4"> </div>
-        <h3 class="text-2xl font-bold text-pink-400 mb-3">Health & Happiness</h3>
+
+        <div class="text-6xl mb-4">💖</div>
+
+        <h3 class="text-2xl font-bold text-pink-400 mb-3">
+          Health & Happiness
+        </h3>
+
         <p class="text-gray-300 leading-relaxed">
-          May God bless you both with good health, boundless happiness, and all the wonderful things life has to offer. Every day ahead is filled with joy!
+          May God bless you both with good health, boundless happiness,
+          and all the wonderful things life has to offer. Every day ahead
+          is filled with joy!
         </p>
-        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10">
+          ❤️
+        </div>
+
       </div>
+
 
       <!-- Wish Card 2 -->
       <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-        <div class="text-6xl mb-4"> </div>
-        <h3 class="text-2xl font-bold text-purple-400 mb-3">Love & Togetherness</h3>
+
+        <div class="text-6xl mb-4">💕</div>
+
+        <h3 class="text-2xl font-bold text-purple-400 mb-3">
+          Love & Togetherness
+        </h3>
+
         <p class="text-gray-300 leading-relaxed">
-          May the love between you two grow stronger with each passing year. May you continue to inspire everyone around you with your beautiful bond.
+          May the love between you two grow stronger with each passing year.
+          May you continue to inspire everyone around you with your beautiful bond.
         </p>
-        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10">💕</div>
+
       </div>
+
 
       <!-- Wish Card 3 -->
       <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-        <div class="text-6xl mb-4"> </div>
-        <h3 class="text-2xl font-bold text-blue-400 mb-3">Dreams & Success</h3>
+
+        <div class="text-6xl mb-4">✨</div>
+
+        <h3 class="text-2xl font-bold text-blue-400 mb-3">
+          Dreams & Success
+        </h3>
+
         <p class="text-gray-300 leading-relaxed">
-          May all your dreams come true this year. May you achieve new heights of success and create memories that last a lifetime together.
+          May all your dreams come true this year. May you achieve new
+          heights of success and create memories that last a lifetime together.
         </p>
-        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10">✨</div>
       </div>
+
 
       <!-- Wish Card 4 -->
       <div class="reveal glow-card rounded-3xl p-8 relative overflow-hidden">
-        <div class="text-6xl mb-4"> </div>
-        <h3 class="text-2xl font-bold text-green-400 mb-3">Adventure & Fun</h3>
+
+        <div class="text-6xl mb-4">🌎</div>
+
+        <h3 class="text-2xl font-bold text-green-400 mb-3">
+          Adventure & Fun
+        </h3>
+
         <p class="text-gray-300 leading-relaxed">
-          May this year bring exciting adventures, unexpected surprises, and endless fun. Here's to laughing together, traveling together, and making the best memories!
+          May this year bring exciting adventures, unexpected surprises,
+          and endless fun. Here's to laughing together, traveling together,
+          and making the best memories!
         </p>
-        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10"> </div>
+
+        <div class="absolute -bottom-4 -right-4 text-8xl opacity-10">
+          🌟
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Typewriter Message -->
+    <div class="reveal mt-20 text-center">
+
+      <div class="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 inline-block max-w-2xl w-full shadow-xl">
+        <p class="text-lg md:text-xl text-gray-200 typewriter" id="typewriterText"></p>
       </div>
     </div>
 
-    <!-- Typewriter message -->
-    <div class="reveal mt-16 text-center">
-      <div class="bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10 inline-block max-w-2xl">
-        <p class="text-lg text-gray-200 typewriter" id="typewriterText"></p>
-      </div>
-    </div>
 
     <!-- Final Message -->
-    <div class="reveal mt-16 text-center space-y-4">
-      <div class="text-6xl heartbeat inline-block">❤️</div>
-      <p class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-['Pacifico']">
+    <div class="reveal mt-20 text-center space-y-5">
+
+      <div class="text-6xl heartbeat inline-block">
+        ❤️
+      </div>
+
+      <p
+              class="text-2xl md:text-4xl font-bold
+               bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400
+               bg-clip-text text-transparent
+               font-['Pacifico']"
+      >
         We Love You Both So Much!
       </p>
-      <p class="text-gray-400">— With all our love, your loving family </p>
+
+      <p class="text-gray-400 text-lg">
+        — With all our love, your loving family ❤️
+      </p>
+
     </div>
+
   </div>
 </section>
+```
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer class="text-center py-8 border-t border-white/10 bg-black/30">
