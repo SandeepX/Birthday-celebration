@@ -415,3 +415,149 @@ mobileMenu.querySelectorAll('a').forEach(link => {
         mobileMenu.classList.remove('flex');
     });
 });
+
+// ═══════════════ ELEMENT REFERENCES ═══════════════
+const funnyBtn = document.getElementById('funnyBtn');
+const funnyModal = document.getElementById('funnyModal');
+const dodgeArena = document.getElementById('dodgeArena');
+const dodgeCloseBtn = document.getElementById('dodgeCloseBtn');
+const donateBtn = document.getElementById('donateBtn');
+
+const qrModal = document.getElementById('qrModal');
+const oathCheckbox = document.getElementById('oathCheckbox');
+const oathBtn = document.getElementById('oathBtn');
+
+const finalQrModal = document.getElementById('finalQrModal');
+const finalCloseBtn = document.getElementById('finalCloseBtn');
+
+// ═══════════════ POPUP 1: DODGE GAME ═══════════════
+const DODGE_RADIUS = 90;     // how close cursor needs to be to trigger dodge
+const SAFE_GAP = 20;         // min gap to keep from donate button
+
+function rectsOverlap(x, y, w, h, rect2, gap) {
+    return !(
+        x + w + gap < rect2.left ||
+        x - gap > rect2.right ||
+        y + h + gap < rect2.top ||
+        y - gap > rect2.bottom
+    );
+}
+
+function moveCloseButtonAwayFrom() {
+    const arenaRect = dodgeArena.getBoundingClientRect();
+    const btnW = dodgeCloseBtn.offsetWidth;
+    const btnH = dodgeCloseBtn.offsetHeight;
+    const maxX = arenaRect.width - btnW;
+    const maxY = arenaRect.height - btnH;
+
+    const donateRect = donateBtn.getBoundingClientRect();
+    const donateRelative = {
+        left: donateRect.left - arenaRect.left,
+        right: donateRect.right - arenaRect.left,
+        top: donateRect.top - arenaRect.top,
+        bottom: donateRect.bottom - arenaRect.top
+    };
+
+    let newX, newY, attempts = 0;
+    do {
+        newX = Math.random() * Math.max(maxX, 0);
+        newY = Math.random() * Math.max(maxY, 0);
+        attempts++;
+    } while (
+        rectsOverlap(newX, newY, btnW, btnH, donateRelative, SAFE_GAP) &&
+        attempts < 20
+        );
+
+    dodgeCloseBtn.style.left = newX + 'px';
+    dodgeCloseBtn.style.top = newY + 'px';
+    dodgeCloseBtn.style.right = 'auto';
+    dodgeCloseBtn.style.bottom = 'auto';
+}
+
+// Proximity-based dodge: checks distance from cursor to button on every mouse move
+dodgeArena.addEventListener('mousemove', (e) => {
+    const btnRect = dodgeCloseBtn.getBoundingClientRect();
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
+    const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+    if (dist < DODGE_RADIUS) {
+        moveCloseButtonAwayFrom();
+    }
+});
+
+// Open popup 1
+funnyBtn.addEventListener('click', () => {
+    funnyModal.classList.remove('hidden');
+    funnyModal.classList.add('flex');
+    // Reset position when opened
+    setTimeout(() => {
+        dodgeCloseBtn.style.left = '5%';
+        dodgeCloseBtn.style.top = '5%';
+        dodgeCloseBtn.style.right = 'auto';
+        dodgeCloseBtn.style.bottom = 'auto';
+    }, 50);
+});
+
+// Give a few real clicks so nobody gets permanently stuck (mobile, or after enough tries)
+let dodgeCount = 0;
+dodgeCloseBtn.addEventListener('click', () => {
+    dodgeCount++;
+    if (dodgeCount >= 5) {
+        funnyModal.classList.add('hidden');
+        funnyModal.classList.remove('flex');
+        dodgeCount = 0;
+    } else {
+        moveCloseButtonAwayFrom();
+    }
+});
+
+// Donate button -> open popup 2 (the oath)
+donateBtn.addEventListener('click', () => {
+    funnyModal.classList.add('hidden');
+    funnyModal.classList.remove('flex');
+    dodgeCount = 0;
+    qrModal.classList.remove('hidden');
+    qrModal.classList.add('flex');
+});
+
+// ═══════════════ POPUP 2: THE OATH ═══════════════
+
+// Enable "Reveal QR" only once the oath is sworn
+oathCheckbox.addEventListener('change', () => {
+    if (oathCheckbox.checked) {
+        oathBtn.disabled = false;
+        oathBtn.classList.remove('bg-gray-700', 'text-gray-400', 'cursor-not-allowed');
+        oathBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-400', 'text-black', 'cursor-pointer');
+        oathBtn.textContent = 'Reveal QR 🎉';
+    } else {
+        oathBtn.disabled = true;
+        oathBtn.classList.add('bg-gray-700', 'text-gray-400', 'cursor-not-allowed');
+        oathBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-400', 'text-black', 'cursor-pointer');
+        oathBtn.textContent = 'Reveal QR 🔒';
+    }
+});
+
+// Reveal QR -> swap to popup 3
+oathBtn.addEventListener('click', () => {
+    if (oathCheckbox.checked) {
+        qrModal.classList.add('hidden');
+        qrModal.classList.remove('flex');
+        finalQrModal.classList.remove('hidden');
+        finalQrModal.classList.add('flex');
+    }
+});
+
+// ═══════════════ POPUP 3: THE QR ═══════════════
+
+// Real close button, no tricks here
+finalCloseBtn.addEventListener('click', () => {
+    finalQrModal.classList.add('hidden');
+    finalQrModal.classList.remove('flex');
+    // Reset oath state for next time it's opened
+    oathCheckbox.checked = false;
+    oathBtn.disabled = true;
+    oathBtn.classList.add('bg-gray-700', 'text-gray-400', 'cursor-not-allowed');
+    oathBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-400', 'text-black', 'cursor-pointer');
+    oathBtn.textContent = 'Reveal QR 🔒';
+});
