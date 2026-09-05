@@ -22,9 +22,11 @@
 
 <!-- ═══ Navbar ═══ -->
 <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
-  <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-3">
-    <span class="text-xl font-bold heartbeat text-pink-400"> </span>
-    <div class="flex gap-6 text-sm font-medium">
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-4 sm:px-6 py-3">
+    <span class="text-lg sm:text-xl font-bold heartbeat text-pink-400">🎂</span>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex gap-6 text-sm font-medium">
       <a href="#home" class="nav-link text-gray-300 hover:text-pink-400">Home</a>
       <a href="#brother" class="nav-link text-gray-300 hover:text-pink-400">Brother</a>
       <a href="#vauju" class="nav-link text-gray-300 hover:text-purple-400">Vauju</a>
@@ -34,9 +36,32 @@
       <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400">Gallery</a>
       <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400">Wishes</a>
     </div>
-    <button id="musicBtn" class="music-btn bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-full text-xs font-semibold transition">🎵 Play Song</button>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button id="musicBtn" class="music-btn bg-purple-600 hover:bg-purple-700 text-white px-2.5 sm:px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap">
+        🎵 <span class="hidden sm:inline">Play Song</span>
+      </button>
+
+      <!-- Hamburger Button (mobile only) -->
+      <button id="menuBtn" class="md:hidden text-gray-300 hover:text-pink-400 text-2xl leading-none p-1" aria-label="Toggle menu">
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobileMenu" class="md:hidden hidden flex-col bg-black/80 backdrop-blur-md border-t border-white/10 px-4 py-3 gap-3 text-sm font-medium">
+    <a href="#home" class="nav-link text-gray-300 hover:text-pink-400 py-1">Home</a>
+    <a href="#brother" class="nav-link text-gray-300 hover:text-pink-400 py-1">Brother</a>
+    <a href="#vauju" class="nav-link text-gray-300 hover:text-purple-400 py-1">Vauju</a>
+    <a href="#cakecutting" class="nav-link text-gray-300 hover:text-yellow-400 py-1">Cake Time</a>
+    <a href="#together" class="nav-link text-gray-300 hover:text-pink-400 py-1">Together</a>
+    <a href="#qrcode" class="nav-link text-gray-300 hover:text-orange-400 py-1">QR Code</a>
+    <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400 py-1">Gallery</a>
+    <a href="#wishes" class="nav-link text-gray-300 hover:text-purple-400 py-1">Wishes</a>
   </div>
 </nav>
+
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <section id="home" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
