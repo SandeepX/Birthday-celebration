@@ -235,9 +235,14 @@ reveals.forEach(r => revealObserver.observe(r));
 })();
 
 (function typewriter() {
+
     const messages = [
-        "Here's to another year of love, laughter, and beautiful memories together. Happy Birthday to the best Dada and Vauju in the world! ",
-        "May your birthdays be as wonderful and special as you both are. Wishing you a lifetime of love and happiness! "
+        "यो वर्ष जिन्दगीमा रमाइला adventure हरू आइरहून् 🥳✈️ अचानक आउने surprise ले मुटु होइन, हाँसो फुटाओस् 😂🎁",
+        "घुम्न जाँदा बाटो हराए पनि मज्जा नहराओस् 🗺️🤣 खाँदा पेट भरियोस् तर मिठो खाने इच्छा कहिल्यै नभरियोस् 🍕🍰😂!",
+        "सधैं यसरी नै हाँस्दै 😄, जिस्किँदै 🤪एक-अर्कालाई सताउँदै 😂 र रमाउँदै ❤️",
+        "धेरैभन्दा धेरै सुन्दर memories बनाउँदै जानुहोस्! 📸✨",
+        "जीवन छोटो छ, त्यसैले धेरै हाँस्नुहोस् 😄 धेरै घुम्नुहोस् ✈️🌍, धेरै खानुहोस् 🍕🍔",
+        "अनि बिल तिर्ने बेला चाहिँ एक-अर्कालाई हेर्नुहोस्! 😂😂❤️"
     ];
     const el = document.getElementById('typewriterText');
     let msgIdx = 0, charIdx = 0, deleting = false;
